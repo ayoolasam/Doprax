@@ -46,7 +46,7 @@
            @blur="markTouched(memory.value)"
           
           :class="[
-      'h-[20px] xl:w-[299px] md:w-[299px] bg-white border-b-[1px] shadow-xs focus:outline-none px-4 rounded-md',
+      'h-[20px] xl:w-[299px] md:w-[299px] focus:border-[#2563EB] bg-white border-b-[1px] shadow-xs focus:outline-none px-4 rounded-md',
       touched[memory.value] && !resources[memory.value] ? 'border-red-500' : 'border-[#F5F5F5]'
     ]"
         />
