@@ -97,14 +97,14 @@
     <div class="py-4 flex justify-between border-t-[2px] border-[#f2f2f2] mt-8">
       <button
         @click="navigateBack"
-        class="border-[1px] bg-[#F3F4F6] hover:bg-[#F3F4F6] disabled:text-[#D1D5DA] focus:outline-none focus:shadow-[0px_4px_10px_#00000000] text-center h-[38px] rounded-md w-[67px] font-normal text-[11.9px] border-[#D1D5DB]"
+        class="border-[1px] cursor-pointer bg-[#F3F4F6] hover:bg-[#F3F4F6] disabled:text-[#D1D5DA] focus:outline-none focus:shadow-[0px_4px_10px_#00000000] text-center h-[38px] rounded-md w-[67px] font-normal text-[11.9px] border-[#D1D5DB]"
       >
         Back
       </button>
 
       <button
         @click="deploy"
-        class="border-[1px] flex gap-2  items-center justify-center text-center h-[38px] rounded-md bg-[#16A34A] w-[67px] font-normal  text-[11.9px] text-white"
+        class="border-[1px] cursor-pointer flex gap-2  items-center justify-center text-center h-[38px] rounded-md bg-[#16A34A] w-[67px] font-normal  text-[11.9px] text-white"
         :class="{'w-[100px] px-4 ': loading}"
       >
       

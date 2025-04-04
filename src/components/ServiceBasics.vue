@@ -155,14 +155,14 @@
 <script setup>
 import { ref, computed,onMounted } from "vue";
 import { useRouter } from "vue-router";
-const router = useRouter();
-
 import MazCheckbox from "maz-ui/components/MazCheckbox";
 import { useServicesStore } from "@/stores/index";
+
+
+
 const showDropDown = ref(false);
-const label = ref("Usa oregon");
 const previewImage = ref(null);
-const checked = ref(false);
+const router = useRouter();
 const selectedRegion = ref("");
 
 const regionOptions = [
