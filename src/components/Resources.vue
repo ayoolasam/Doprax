@@ -21,9 +21,10 @@
         type="radio"
         v-model="instanceType"
         :value="check.title"
-        class="h-[16px] w-[16px]"
+        
+        class="h-[16px] w-[16px] cursor-pointer focus:outline-none"
       />
-      <div class="flex flex-col gap-2">
+      <div class="flex flex-col cursor-pointer gap-2" @click="instanceType = check.title">
         <p class="text-[11.9px] font-medium">{{ check.title }}</p>
         <p class="title font-normal text-[11.9px]">{{ check.description }}</p>
       </div>
@@ -55,9 +56,9 @@
     </button>
   
     <button
-  
+  :disabled="!instanceType  || !resources.vCPU  || !resources.memory || !resources.storage"
       @click="saveStepTwo"
-      class="border-[1px] text-center h-[38px] rounded-md focus:border-[2px] focus:border-[#DAE5FF] hover:bg-[#0854FD] w-[67px] font-normal disabled:text-[] text-[11.9px] text-white bg-[#2563EB]"
+      class="border-[1px] disabled:bg-[#0050FF1A] disabled:border-[1px] disabled:border-[#00000000] text-center h-[38px] rounded-md focus:border-[2px] focus:border-[#DAE5FF] hover:bg-[#0854FD] w-[67px] font-normal disabled:text-[] text-[11.9px] text-white bg-[#2563EB]"
     >
       Next
     </button>

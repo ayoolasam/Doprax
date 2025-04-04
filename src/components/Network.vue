@@ -11,9 +11,18 @@
         <label class="font-medium text-[#374151] text-[11.9px] flex gap-4"
           >Virtual Private Cloud(VPC) <span style="color: red">*</span></label
         >
-        <div class="flex justify-between ">
-          <input v-model="network.vpc" class="outline-none hover:border-[#E5E6E7] focus:border-[#2563EB] w-full border-b-[1px] border-[#F5F5F5] " />
+        <div class="flex flex-col gap-2">
+          <div class="flex justify-between">
+            <input v-model="network.vpc"  @blur="vpcTouched = true" class="outline-none   " />
           <i   class="ri-arrow-drop-down-line -ml-[20px] "></i>
+          </div>
+          
+          <span
+        v-if="vpcError"
+        class="font-normal text-[12px] text-[#EF4444]"
+      >
+        Vpc is required
+      </span>
         </div>
       </div>
       <div class="flex flex-col flex-1 gap-4">
@@ -21,20 +30,27 @@
           >Subnet <span style="color: red">*</span></label
         >
         <div class="flex justify-between ">
-          <input v-model="network.subnet" class="outline-none hover:border-[#E5E6E7] focus:border-[#2563EB] w-full border-b-[1px] border-[#F5F5F5] " />
+          <input v-model="network.subnet" @blur="subNetTouched = true" class="outline-none  " />
           <i   class="ri-arrow-drop-down-line -ml-[20px] "></i>
         </div>
-       
+
+         
+          <span
+        v-if="subNetError"
+        class="font-normal text-[12px] text-[#EF4444]"
+      >
+        Subnet is required
+      </span>
       </div>
     </div>
-    <div class="flex gap-2 flex-col">
-      <div class="flex gap-2 items-center">
+    <div class="flex gap-2 flex-col ">
+      <div class="flex gap-2 cursor-pointer focus:outline-none items-center">
         <input
           type="checkbox"
           v-model="network.publicIp"
           class="w-[16px] h-[16px]"
         />
-        <p class="text-[#374151] font-normal text-[11.9px]">
+        <p @click="network.publicIp = !network.publicIp" class="text-[#374151] font-normal text-[11.9px]">
           Assign public IP address
         </p>
       </div>
@@ -51,7 +67,7 @@
     </div>
     <div class="flex flex-col gap-4">
       <div
-        class="flex gap-2 items-center"
+        class="flex gap-2 items-center cusor-pointer"
         v-for="(check, index) in checkList"
         :key="index"
       >
@@ -59,9 +75,9 @@
           type="checkbox"
           v-model="securityGroups"
           :value="check.value"
-          class="w-[16px] h-[16px]"
+          class="w-[16px] h-[16px] outline-none cursor-pointer"
         />
-        <p class="text-[#374151] font-normal text-[11.9px]">
+        <p @click="saveSecurityGroups(check.value)" class="text-[#374151] cursor-pointer font-normal text-[11.9px]">
           {{ check.title }}
         </p>
       </div>
@@ -75,8 +91,9 @@
       </button>
 
       <button
+      :disabled="!network.publicIp || !network.vpc ||!network.subnet"
         @click="saveStepThree"
-        class="border-[1px] text-center h-[38px] rounded-md focus:border-[2px] focus:border-[#DAE5FF] hover:bg-[#0854FD] w-[67px] font-normal disabled:text-[] text-[11.9px] text-white bg-[#2563EB]"
+        class="border-[1px] text-center h-[38px] rounded-md focus:border-[2px] focus:border-[#DAE5FF] hover:bg-[#0854FD] w-[67px] font-normal disabled:bg-[#0050FF1A] disabled:border-[1px] disabled:border-[#00000000] text-[11.9px] text-white bg-[#2563EB]"
       >
         Next
       </button>
@@ -86,13 +103,25 @@
 
 <script setup>
 import { useServicesStore } from "@/stores/index";
-import { ref } from "vue";
+import { ref,computed } from "vue";
 
 const servicesStore = useServicesStore();
 const network = ref({
   publicIp: false,
   vpc: "",
   subnet: "",
+});
+
+const subNetTouched = ref(false);
+const vpcTouched = ref(false);
+
+const subNetError = computed(() => {
+  return subNetTouched.value && network.value.subnet.trim() === "";
+});
+
+
+const vpcError = computed(() => {
+  return vpcTouched.value && network.value.vpc.trim() === "";
 });
 const securityGroups = ref([]);
 const emit = defineEmits(["next", "back"]);
@@ -120,6 +149,10 @@ const saveStepThree = () => {
   emit("next", 4);
   servicesStore.updateNetwork(network.value);
   servicesStore.setSecurityGroups(securityGroups.value);
+};
+
+const saveSecurityGroups = (value) => {
+  securityGroups.value.push (value)
 };
 
 const navigateBack = () => {

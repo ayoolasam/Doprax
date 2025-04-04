@@ -9,10 +9,10 @@
         >
           <p class="font-semibold text-[15.3px]">Cloud Service Details</p>
           <div class="flex gap-4 items-center">
-            <div class="w-[16px] h-[18px]">
+            <div @click="emit('edit')" class="w-[16px] h-[18px]">
               <img src="../assets/images/edit.png" alt="image" />
             </div>
-            <div class="w-[16px] h-[18px]">
+            <div @click="emit('delete')" class="w-[16px] h-[18px]">
               <img src="../assets/images/delete.png" alt="image" />
             </div>
 
@@ -89,10 +89,8 @@
 import { useServicesStore } from "@/stores";
 
 
-
-
 const {usersServices} = useServicesStore();
-const emit = defineEmits(["close"]);
+const emit = defineEmits(["close","delete","edit"]);
 </script>
 
 <style lang="scss" scoped></style>

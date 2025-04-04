@@ -66,7 +66,7 @@
       </div>
     </div>
     <deleteModal v-if="modal" @close="modal = false" :service="usersServices" />
-    <cloudServiceDetails v-if="details" @close="details = false" />
+    <cloudServiceDetails v-if="details" @close="details = false" @edit="navToEdit" @delete="modal = true" />
   </div>
 </template>
 
@@ -75,16 +75,25 @@ import deleteModal from "@/components/deleteModal.vue";
 import cloudServiceDetails from "@/components/cloudServiceDetails.vue";
 import { useServicesStore } from "@/stores";
 import { ref } from "vue";
+import { useRouter } from "vue-router";
 
 const { usersServices } = useServicesStore();
 const modal = ref(false);
 const details = ref(false);
+const router = useRouter();
 
 const toggleDeleteModal = () => {
   modal.value = true;
 };
 const togglecloudServicesDetails = () => {
   details.value = true;
+};
+
+const navToEdit = () => {
+router.push({
+    name: "editServiceConfigurations",
+    params: { serviceId: usersServices.id },
+  });
 };
 </script>
 
