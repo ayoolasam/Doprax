@@ -75,7 +75,7 @@
       >
         <p class="title xl:w-[20%] md:w-[20%] sm:w-[20%]">Security Groups</p>
         <div
-          class="w-full rounded-md flex px-4 py-4 border-[1px] border-[#E5E7EB]"
+          class="w-full rounded-md xl:flex-row md:flex-row flex-col gap-2 flex px-4 py-4 border-[1px] border-[#E5E7EB]"
         >
           <p
             v-for="(group, index) in servicesStore.securityGroups"

@@ -35,7 +35,7 @@
       <div
         v-for="(memory, index) in memories"
         :key="index"
-        class="flex flex-col gap-2"
+        class="flex flex-col gap-4"
       >
         <label class="font-medium text-[11.9px] flex gap-4"
           >{{ memory.title }} <span style="color: red">*</span></label
@@ -43,8 +43,19 @@
         <input
           type="text"
           v-model="resources[memory.value]"
-          class="h-[20px] xl:w-[299px] md:w-[299px] bg-white shadow-xs focus:outline-none px-4 rounded-md"
+           @blur="markTouched(memory.value)"
+          
+          :class="[
+      'h-[20px] xl:w-[299px] md:w-[299px] bg-white border-b-[1px] shadow-xs focus:outline-none px-4 rounded-md',
+      touched[memory.value] && !resources[memory.value] ? 'border-red-500' : 'border-[#F5F5F5]'
+    ]"
         />
+        <span
+    v-if="touched[memory.value] && !resources[memory.value]"
+    class="text-red-500 text-[11px]"
+  >
+    This field is required
+  </span>
       </div>
     </div>
     <div class="py-4 flex justify-between border-t-[2px] border-[#f2f2f2] mt-8">
@@ -68,7 +79,7 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref ,reactive} from "vue";
 import { useServicesStore } from "@/stores/index";
 
 const servicesStore = useServicesStore();
@@ -112,6 +123,11 @@ const memories = [
   },
 ];
 
+const touched = reactive({});
+
+const markTouched = (key) => {
+  touched[key] = true;
+};
 
 const navigateBack = () => {
   emit("back");

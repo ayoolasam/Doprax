@@ -32,7 +32,7 @@
         
         </div>
 
-        <div class="rounded-md bg-[#F9FAFB] xl:mt-0 mt-12">
+        <div class="rounded-md bg-[#F9FAFB] xl:mt-2 mt-12">
           <div class="border-b-[1px] flex flex-col gap-4 border-[#eaecef] p-4">
             <p class="title">CoverImage</p>
             <div>
