@@ -2,13 +2,14 @@
   <div
     class="fixed top-0 left-0 w-full h-full bg-[#00000066] z-[1000] flex xl:justify-end md:justify-end justify-center p-[20px] xl:p-0 items-center"
   >
-    <div class="overflow-y-auto h-full w-[429px]">
+    <div class="overflow-y-auto  h-full w-[429px]">
       <div class="bg-[#FFFFFF] w-full px-4 flex flex-col">
         <div
-          class="h-[68px] border-b-[1px] border-[#E1E3E6] p-4 flex items-center justify-between"
+          class="h-[68px]  border-b-[1px] border-[#E1E3E6] p-4 flex relative items-center  justify-between"
         >
-          <p class="font-semibold text-[15.3px]">Cloud Service Details</p>
-          <div class="flex gap-4 items-center">
+        <div class="xl:w-[85%] md:w-[85%] sm:w-[85%] cursor-pointer w-full relative  flex justify-between  items-center">
+          <p class="font-semibold w-full whitespace-nowrap  text-[15.3px]">Cloud Service Details</p>
+          <div class="flex gap-4  w-full justify-end md:static items-center xl:static sm:static  absolute right-0 top-16">
             <div @click="emit('edit')" class="w-[16px] h-[18px]">
               <img src="../assets/images/edit.png" alt="image" />
             </div>
@@ -16,17 +17,22 @@
               <img src="../assets/images/delete.png" alt="image" />
             </div>
 
-            <div
+            
+          </div>
+
+          
+        </div>
+        <div
               @click="emit('close')"
-              class="h-[44px] w-[44px] cursor-pointer flex items-center justify-center  rounded-full bg-[#EBEFF4]"
+              class="h-[44px] absolute right-2 top-2 w-[44px] cursor-pointer flex items-center justify-center  rounded-full bg-[#EBEFF4]"
             >
             <i class="ri-close-line text-[24px] font-normal text-[#58595D]"></i>
           
             </div>
-          </div>
+        
         </div>
 
-        <div class="rounded-md bg-[#F9FAFB] mt-4">
+        <div class="rounded-md bg-[#F9FAFB] xl:mt-0 mt-12">
           <div class="border-b-[1px] flex flex-col gap-4 border-[#eaecef] p-4">
             <p class="title">CoverImage</p>
             <div>

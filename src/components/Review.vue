@@ -104,9 +104,13 @@
 
       <button
         @click="deploy"
-        class="border-[1px] text-center h-[38px] rounded-md bg-[#16A34A] w-[67px] font-normal disabled:text-[] text-[11.9px] text-white"
+        class="border-[1px] flex gap-2  items-center justify-center text-center h-[38px] rounded-md bg-[#16A34A] w-[67px] font-normal  text-[11.9px] text-white"
+        :class="{'w-[100px] px-4 ': loading}"
       >
-        Deploy
+      
+        <span>Deploy</span>
+        <MazSpinner v-if="loading" size="2em" color="white" />
+       
       </button>
     </div>
   </div>
@@ -114,6 +118,7 @@
 
 <script setup>
 import { ref } from "vue";
+  import MazSpinner from 'maz-ui/components/MazSpinner'
 import { useServicesStore } from "@/stores/index";
 import axios from "axios";
 import { useRouter } from "vue-router";
@@ -122,12 +127,14 @@ const router = useRouter();
 const servicesStore = useServicesStore();
 
 const emit = defineEmits(["back"]);
+const loading = ref(false);
 
 const navigateBack = () => {
   emit("back");
 };
 
 const deploy = async () => {
+  loading.value = true;
   try {
     const response = await axios.post("https://reqres.in/api/users", {
       serviceName: servicesStore.serviceName,
@@ -139,6 +146,7 @@ const deploy = async () => {
       securityGroups: servicesStore.securityGroups,
     });
     if (response) {
+      loading.value = false;
       servicesStore.usersServices = response.data
     
       router.push("/deployed");

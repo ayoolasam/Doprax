@@ -66,7 +66,7 @@
       </div>
     </div>
     <deleteModal v-if="modal" @close="modal = false" :service="usersServices" />
-    <cloudServiceDetails v-if="details" @close="details = false" @edit="navToEdit" @delete="modal = true" />
+    <cloudServiceDetails v-if="details" @close="details = false" @edit="navToEdit" @delete="toggleDeleteModal" />
   </div>
 </template>
 
@@ -84,16 +84,17 @@ const router = useRouter();
 
 const toggleDeleteModal = () => {
   modal.value = true;
+  details.value = false;
 };
+
 const togglecloudServicesDetails = () => {
   details.value = true;
 };
 
 const navToEdit = () => {
-router.push({
-    name: "editServiceConfigurations",
-    params: { serviceId: usersServices.id },
-  });
+router.push("/editServiceConfigurations");
+  details.value = false;
+  modal.value = false;
 };
 </script>
 

@@ -12,7 +12,7 @@
         v-if="previewImage"
         class="h-[100px] w-[100px] flex flex-col gap-2 items-center justify-center bg-[#F3F4F6] rounded-lg"
       >
-        <img :src="previewImage" alt="upload" class=" object-cover w-full h-full" />
+        <img :src="previewImage" alt="upload" class=" object-cover w-full h-full rounded-lg" />
       </div>
 
       <!-- uploadImage -->
@@ -81,17 +81,12 @@
       <div class="flex flex-col gap-4">
         <input
           type="text"
-          @blur="descriptionTouched = true"
+        
           v-model="description"
-          class="border-b-[1px] focus:outline-none md:w-[70%] sm:w-[70%] xl:w-[70%]"
-          :class="[descriptionError ? ' border-[#ef4444]' : 'border-[#f5f5f5]']"
+          class="border-b-[1px] focus:outline-none md:w-[70%]  border-[#f5f5f5] sm:w-[70%] xl:w-[70%]"
+         
         />
-        <span
-          v-if="descriptionError"
-          class="font-normal text-[12px] text-[#EF4444]"
-        >
-          Description is required
-        </span>
+      
       </div>
     </div>
     <div class="flex flex-col gap-2 w-full md:w-[70%] sm:w-[70%] xl:w-[70%]">
@@ -147,7 +142,7 @@
       </button>
 
       <button
-        :disabled="!serviceName || !description || !selectedRegion"
+        :disabled="!serviceName  || !selectedRegion"
         @click="saveStepOne"
         class="border-[1px] cursor-pointer text-center h-[38px] rounded-md focus:border-[2px] focus:border-[#DAE5FF] hover:bg-[#0854FD] w-[67px] font-normal disabled:bg-[#0050FF1A] disabled:border-[1px] disabled:border-[#00000000] text-[11.9px] text-white bg-[#2563EB]"
       >
