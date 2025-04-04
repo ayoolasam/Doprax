@@ -5,29 +5,37 @@
     >
       <h1 class="font-medium text-[17px]">Your Cloud Services</h1>
 
-      <!-- <div class="flex flex-col gap-4 items-center">
-  <div class="flex items-center flex-col gap-4 justify-center">
-         <img src="../assets/images/lucide_cloud-cog.png" alt="image"/>
-         <p>No cloud services yet</p>
-         <p class="title">Click on the button below to create and manage a cloud service</p>
+      <div v-if="!usersServices" class="flex flex-col gap-4 items-center">
+        <div class="flex items-center flex-col gap-4 justify-center">
+          <img src="../assets/images/lucide_cloud-cog.png" alt="image" />
+          <p>No cloud services yet</p>
+          <p class="title">
+            Click on the button below to create and manage a cloud service
+          </p>
         </div>
-     
-    
+
         <router-link to="/">
-          <button class="bg-[#2563EB] text-white px-4 h-[38px] text-center rounded-md font-medium text-[11.9px]">Create a cloud service</button>
+          <button
+            class="bg-[#2563EB] text-white px-4 h-[38px] text-center rounded-md font-medium text-[11.9px]"
+          >
+            Create a cloud service
+          </button>
         </router-link>
-</div> -->
+      </div>
 
       <div
+        v-else
         class="xl:h-[292px] xl:w-[466px] flex-col flex justify-between gap-4 rounded-[12px] p-4 border-[1px] border-[#E1E3E6]"
       >
         <div>
           <img src="../assets/images/hardImage.png" alt="image" class="cover" />
         </div>
         <div class="flex flex-col gap-2">
-          <h1 class="text-[20px] font-medium">Cloud Service Name</h1>
+          <h1 class="text-[20px] font-medium">
+            {{ usersServices.serviceName }}
+          </h1>
           <p class="font-normal text-[14px] text-[#6B7280]">
-            Description Text Goes here.
+            {{ usersServices.description }}
           </p>
         </div>
 
@@ -57,16 +65,18 @@
         </div>
       </div>
     </div>
+    <deleteModal v-if="modal" @close="modal = false" :service="usersServices" />
+    <cloudServiceDetails v-if="details" @close="details = false" />
   </div>
-  <deleteModal v-if="modal" @close="modal = false" />
-  <cloudServiceDetails v-if="details" @close="details = false" />
 </template>
 
 <script setup>
 import deleteModal from "@/components/deleteModal.vue";
 import cloudServiceDetails from "@/components/cloudServiceDetails.vue";
+import { useServicesStore } from "@/stores";
 import { ref } from "vue";
 
+const { usersServices } = useServicesStore();
 const modal = ref(false);
 const details = ref(false);
 

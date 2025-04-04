@@ -68,7 +68,7 @@
       <input
         type="text"
         v-model="description"
-        class="border-b-[1px] focus:outline-none border-[#f5f5f5] w-[70%]"
+        class="border-b-[1px] focus:outline-none border-[#f5f5f5] md:w-[70%] sm:w-[70%] xl:w-[70%]"
       />
     </div>
     <div class="flex flex-col gap-2 w-full md:w-[70%] sm:w-[70%] xl:w-[70%]">
@@ -90,7 +90,7 @@
         <div
         v-if="showDropDown"
           style="box-shadow: 0px 4px 10px rgba(16, 25, 40, 0.05)"
-          class="absolute border-[1px] rounded-[8px] border-[#F0F2F5] bg-[#FFFFFF] top-6 left-0 h-[242px] px-[12px] py-4 overflow-y-auto w-[381px]"
+          class="absolute border-[1px] rounded-[8px] border-[#F0F2F5] bg-[#FFFFFF] top-6 left-0 h-[242px] px-[12px] py-4 w-full overflow-y-auto md:w-[381px] xl:w-[381px]"
         >
           <p class="font-medium text-[14px]">Select a region</p>
           <ul class="mt-4">
@@ -134,6 +134,8 @@
 
 <script setup>
 import { ref, computed } from "vue";
+import { useRouter } from "vue-router";
+const router= useRouter();
 
 import MazCheckbox from "maz-ui/components/MazCheckbox";
 import { useServicesStore } from "@/stores/index";

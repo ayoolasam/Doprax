@@ -29,7 +29,7 @@
       </div>
     </div>
     <div
-      class="justify-between grid xl:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-8 xl:px-8"
+      class="justify-between grid xl:grid-cols-3 md:grid-cols-2 sm:grid-cols-2 grid-cols-1 gap-8 xl:px-8"
     >
       <div
         v-for="(memory, index) in memories"

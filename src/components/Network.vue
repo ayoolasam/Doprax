@@ -6,18 +6,25 @@
         Configure the network settings for your cloud service
       </p>
     </div>
-    <div class="flex justify-between">
+    <div class="grid grid-cols-1 md:grid-cols-2 sm:grid-cols-2 xl:grid-cols-2 gap-8">
       <div class="flex flex-col flex-1 gap-4">
-        <label class="font-medium text-[11.9px] flex gap-4"
+        <label class="font-medium text-[#374151] text-[11.9px] flex gap-4"
           >Virtual Private Cloud(VPC) <span style="color: red">*</span></label
         >
-        <input v-model="network.vpc" />
+        <div class="flex justify-between ">
+          <input v-model="network.vpc" class="outline-none hover:border-[#E5E6E7] focus:border-[#2563EB] w-full border-b-[1px] border-[#F5F5F5] " />
+          <i   class="ri-arrow-drop-down-line -ml-[20px] "></i>
+        </div>
       </div>
       <div class="flex flex-col flex-1 gap-4">
-        <label class="font-medium text-[11.9px] flex gap-4"
+        <label class="font-medium text-[#374151] text-[11.9px] flex gap-4"
           >Subnet <span style="color: red">*</span></label
         >
-        <input v-model="network.subnet" />
+        <div class="flex justify-between ">
+          <input v-model="network.subnet" class="outline-none hover:border-[#E5E6E7] focus:border-[#2563EB] w-full border-b-[1px] border-[#F5F5F5] " />
+          <i   class="ri-arrow-drop-down-line -ml-[20px] "></i>
+        </div>
+       
       </div>
     </div>
     <div class="flex gap-2 flex-col">

@@ -103,7 +103,7 @@
       </button>
 
       <button
-        @click="saveStepThree"
+        @click="deploy"
         class="border-[1px] text-center h-[38px] rounded-md bg-[#16A34A] w-[67px] font-normal disabled:text-[] text-[11.9px] text-white"
       >
         Deploy
@@ -115,6 +115,9 @@
 <script setup>
 import { ref } from "vue";
 import { useServicesStore } from "@/stores/index";
+import axios from "axios";
+import { useRouter } from "vue-router";
+const router = useRouter();
 
 const servicesStore = useServicesStore();
 
@@ -122,6 +125,28 @@ const emit = defineEmits(["back"]);
 
 const navigateBack = () => {
   emit("back");
+};
+
+const deploy = async () => {
+  try {
+    const response = await axios.post("https://reqres.in/api/users", {
+      serviceName: servicesStore.serviceName,
+      description: servicesStore.description,
+      region: servicesStore.region,
+      instanceType: servicesStore.instanceType,
+      resources: servicesStore.resources,
+      network: servicesStore.network,
+      securityGroups: servicesStore.securityGroups,
+    });
+    if (response) {
+      servicesStore.usersServices = response.data
+    
+      router.push("/deployed");
+    }
+  } catch (err) {
+    console.error(err);
+    
+  }
 };
 </script>
 

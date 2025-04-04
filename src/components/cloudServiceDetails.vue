@@ -39,32 +39,34 @@
           </div>
           <div class="border-b-[1px] flex flex-col border-[#eaecef] p-4">
             <p class="title">Service Name</p>
-            <p class="text-[11.9px] font-normal">ayo</p>
+            <p class="text-[11.9px] font-normal">{{ usersServices.serviceName }}</p>
           </div>
           <div class="border-b-[1px] flex gap-4 flex-col border-[#eaecef] p-4">
             <p class="title">Description</p>
-            <p class="text-[11.9px] font-normal">ayo</p>
+            <p class="text-[11.9px] font-normal">{{ usersServices.description}}</p>
           </div>
           <div class="border-b-[1px] flex gap-4 flex-col border-[#eaecef] p-4">
             <p class="title">Region</p>
-            <p class="text-[11.9px] font-normal">US West (N. California)</p>
+            <p class="text-[11.9px] font-normal">{{ usersServices.region }}</p>
           </div>
           <div class="border-b-[1px] flex gap-4 flex-col border-[#eaecef] p-4">
             <p class="title">Instance Type</p>
-            <p class="text-[11.9px] font-normal">Standard (General Purpose)</p>
+            <p class="text-[11.9px] font-normal">{{ usersServices.instanceType }}</p>
           </div>
           <div class="border-b-[1px] flex flex-col gap-4 border-[#eaecef] p-4">
             <p class="title">Resources</p>
-            <p class="text-[11.9px] font-normal">
-              2 vCPU, 4 Gb Memory,100 Gb Storage
+            <p class="text-[11.9px] font-normal flex gap-4">
+              <span>{{ usersServices.resources.vCPU }} vCPU,</span>
+          <span> {{ usersServices.resources.memory }} Memory,</span>
+          <span>{{ usersServices.resources.storage }} Storage </span>
             </p>
           </div>
           <div class="border-b-[1px] flex flex-col gap-4 border-[#eaecef] p-4">
             <p class="title">Network</p>
             <div class="text-[11.9px] font-normal">
-              <p class="text-[11.9px]">VPC :Development VPC</p>
-              <p class="text-[11.9px]">Subnet :Development Subnet (AZ-b)</p>
-              <p class="text-[11.9px]">Public IP: Yes</p>
+              <p class="text-[11.9px]">VPC :{{ usersServices.network.vpc }}</p>
+              <p class="text-[11.9px]">Subnet :{{ usersServices.network.subnet }}</p>
+              <p class="text-[11.9px]">Public IP: {{ usersServices.network.publicIp ? "Yes": 'No' }}</p>
             </div>
           </div>
           <div
@@ -74,7 +76,7 @@
             <div
               class="w-full rounded-md px-4 py-4 border-[1px] border-[#E5E7EB]"
             >
-              <p class="text-[11.9px] font-normal">Web Traffic (80, 443)</p>
+              <p v-for="(group,index) in usersServices.securityGroups" :key="index" class="text-[11.9px] font-normal">{{ group }}</p>
             </div>
           </div>
         </div>
@@ -84,7 +86,12 @@
 </template>
 
 <script setup>
-import Button from "./button.vue";
+import { useServicesStore } from "@/stores";
+
+
+
+
+const {usersServices} = useServicesStore();
 const emit = defineEmits(["close"]);
 </script>
 
