@@ -156,7 +156,7 @@
               >{{ memory.title }} <span style="color: red">*</span></label
             >
             <input
-              type="text"
+              type="number"
               v-model="resources[memory.value]"
               class="h-[20px] xl:w-[299px] md:w-[299px] bg-white shadow-xs focus:outline-none px-4 rounded-md"
             />

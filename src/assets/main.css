@@ -7,14 +7,13 @@ body {
 }
 * {
   box-sizing: border-box;
-  
 }
-.active-step{
-color:#2563EB
+.active-step {
+  color: #2563eb;
 }
 
-.title{
-  color:#6B7280;
+.title {
+  color: #6b7280;
   font-size: 11.9px;
 }
 
@@ -22,18 +21,17 @@ color:#2563EB
   display: none;
 }
 .no-scrollbar {
-  -ms-overflow-style: none; 
-  scrollbar-width: none;   
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
-
-
-.no-spinner::-webkit-inner-spin-button,
-.no-spinner::-webkit-outer-spin-button {
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
 
-.no-spinner {
+
+input[type='number'] {
   -moz-appearance: textfield;
 }
