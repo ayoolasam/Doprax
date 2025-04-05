@@ -30,7 +30,10 @@
 
 <script setup>
 import Button from "./button.vue";
+import { useToast } from "maz-ui";
 import axios from "axios";
+
+const toast = useToast();
 const emit = defineEmits(["close"]);
 const props = defineProps({
   service: {
@@ -48,8 +51,13 @@ const deleteService = async () => {
     if (response) {
       emit("close");
     }
-  } catch (err) {
-    console.error(err);
+  } catch (e) {
+    if (e.message.includes("Network")) {
+      toast.error("Please check your internet connection");
+
+    } else {
+      toast.error(e.response.data.message);
+    }
   }
 };
 </script>

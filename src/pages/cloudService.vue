@@ -8,8 +8,8 @@
       <div v-if="!usersServices" class="flex flex-col gap-4 items-center">
         <div class="flex items-center flex-col gap-4 justify-center">
           <img src="../assets/images/lucide_cloud-cog.png" alt="image" />
-          <p>No cloud services yet</p>
-          <p class="title">
+          <p class="text-center px-2 sm:px-4 max-w-[90%] mx-auto font-medium text-[15.3px] text-[#111827]">No cloud services yet</p>
+          <p class="title text-center px-2 sm:px-4 max-w-[90%] mx-auto">
             Click on the button below to create and manage a cloud service
           </p>
         </div>
@@ -27,8 +27,8 @@
         v-else
         class="xl:h-[292px] xl:w-[466px] flex-col flex justify-between gap-4 rounded-[12px] p-4 border-[1px] border-[#E1E3E6]"
       >
-        <div>
-          <img src="../assets/images/hardImage.png" alt="image" class="cover" />
+        <div class="h-[100px] w-[100px] flex flex-col gap-2 items-center justify-center bg-[#F3F4F6] rounded-lg">
+          <img src="../assets/images/hardImage.png" alt="image" class=" object-cover w-full h-full rounded-lg" />
         </div>
         <div class="flex flex-col gap-2">
           <h1 class="text-[20px] font-medium">

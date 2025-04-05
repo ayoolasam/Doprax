@@ -4,11 +4,9 @@
       class="bg-white h-full w-full rounded-xl shadow-md p-8 flex flex-col gap-8"
     >
       <h1 class="font-medium text-[17px]">Configure New Cloud Service</h1>
-      <div
-        class="grid gap-4 xl:grid-cols-4 grid-cols-1 md:grid-cols-2 sm:grid-cols-2"
-      >
+     
         <Steps :steps="steps" :activeStep="step" />
-      </div>
+      
       <div class="mt-12">
         <ServiceBasics v-if="step === 1" @next="nextStep" :step="step"  />
         <Resources v-if="step === 2"  @next="nextStep" @back="backStep"/>

@@ -199,7 +199,16 @@ const uploadImage = (e) => {
   const file = e.target.files[0];
   if (!file) return;
 
-  previewImage.value = URL.createObjectURL(file);
+  if (!file) return;
+
+const reader = new FileReader();
+
+reader.onload = () => {
+  previewImage.value = reader.result;
+  servicesStore.setCoverImage(reader.result);
+};
+
+reader.readAsDataURL(file);
 };
 
 const deleteImage = () => {

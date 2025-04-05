@@ -5,8 +5,8 @@
     
       <div class="flex items-center flex-col gap-4 justify-center">
          <img src="../assets/icons/Frame.png" alt="image"/>
-         <p>Cloud Service Successfully Deployed</p>
-         <p class="title">Click on the button below to view and manage your cloud service</p>
+         <p class="font-medium text-[15.3px] text-center px-2 sm:px-4 max-w-[90%] mx-auto  text-[#111827]">Cloud Service Successfully Deployed</p>
+         <p class="title font-normal text-center px-2 sm:px-4 max-w-[90%] mx-auto">Click on the button below to view and manage your cloud service</p>
         </div>
      
     

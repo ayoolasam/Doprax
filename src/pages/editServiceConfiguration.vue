@@ -20,7 +20,7 @@
             type="text"
             v-model="serviceName"
             @blur="serviceNameTouched = true"
-            class="border-b-[1px] focus:outline-none xl:w-[70%]"
+            class="border-b-[1px] text-[#CCCCCC] font-normal text-[14px] focus:outline-none xl:w-[70%]"
             :class="[
               serviceNameError ? ' border-[#ef4444]' : 'border-[#f5f5f5]',
             ]"
@@ -33,12 +33,18 @@
           </span>
         </div>
         <div class="flex flex-col gap-8">
-          <label class="font-medium text-[11.9px]">Description</label>
-          <div class="flex flex-col gap-4">
+          <div class="flex-col flex gap-2">
+            <label class="font-medium text-[11.9px]">Description</label>
+            <span class="text-[#CCCCCC] text-[14px] font-normal">Describe your service (optional)</span>
+          </div>
+         
+          <div class="flex flex-col  gap-4">
+           
             <input
               type="text"
               @blur="descriptionTouched = true"
               v-model="description"
+           
               class="border-b-[1px] focus:outline-none md:w-[70%] sm:w-[70%] xl:w-[70%]"
               :class="[
                 descriptionError ? ' border-[#ef4444]' : 'border-[#f5f5f5]',
@@ -63,10 +69,12 @@
           <div
             class="border-b-[1px] dropdown cursor-pointer relative border-[#F5F5F5]"
           >
+        
             <div
               @click.stop="showDropDown = !showDropDown"
               class="flex py-2 justify-between"
             >
+            <span v-if="!selectedRegion" class="text-[14px] font-nomal">Select A region</span>
               <p>{{ selectedRegion }}</p>
               <i class="ri-arrow-drop-down-line"></i>
             </div>
@@ -176,8 +184,8 @@
               <div class="flex justify-between">
                 <input
                   v-model="network.vpc"
-                  @blur="vpcTouched = true"
-                  class="outline-none"
+                 
+                  class="outline-none text-[14px] font-normal"
                 />
                 <i class="ri-arrow-drop-down-line -ml-[20px]"></i>
               </div>
@@ -197,8 +205,8 @@
             <div class="flex justify-between">
               <input
                 v-model="network.subnet"
-                @blur="subNetTouched = true"
-                class="outline-none"
+           
+                class="outline-none text-[14px] font-normal"
               />
               <i class="ri-arrow-drop-down-line -ml-[20px]"></i>
             </div>
@@ -268,9 +276,11 @@
 
         <button
           @click="edit"
-          class="border-[1px] cursor-pointer text-center h-[38px] rounded-md focus:border-[2px] focus:border-[#DAE5FF] hover:bg-[#0854FD] px-4 font-normal text-[11.9px] text-white bg-[#2563EB]"
+           :class="{' px-2 ': loading}"
+          class="border-[1px]  cursor-pointer text-center items-center flex  h-[38px] rounded-md focus:border-[2px] focus:border-[#DAE5FF] hover:bg-[#0854FD] px-4 font-normal text-[11.9px] text-white bg-[#2563EB]"
         >
-          Save Changes
+        <span class="flex w-full">Save Changes</span>
+          <MazSpinner v-if="loading" size="2em" color="white" />
         </button>
       </div>
     </div>
@@ -279,29 +289,38 @@
 
 <script setup>
 import MazCheckbox from "maz-ui/components/MazCheckbox";
+  import MazSpinner from 'maz-ui/components/MazSpinner'
+import { useToast } from "maz-ui";
 import { ref, computed, onMounted } from "vue";
 import axios from "axios";
 import { useServicesStore } from "@/stores";
+import { useRouter } from "vue-router";
 
-const description = ref("");
+
+const toast = useToast()
+const { usersServices } = useServicesStore();
+const servicesStore = useServicesStore();
+const router = useRouter();
+const description = ref(null);
+const loading = ref(false);
 const serviceNameTouched = ref(false);
-const serviceName = ref("");
+const serviceName = ref(usersServices.serviceName);
 const descriptionTouched = ref(false);
 const showDropDown = ref(false);
-const selectedRegion = ref("");
+const selectedRegion = ref(null);
 const securityGroups = ref([]);
-const { usersServices } = useServicesStore();
 
-const instanceType = ref(null);
+
+const instanceType = ref(usersServices.instanceType);
 const resources = ref({
-  vCPU: "",
-  memory: "",
-  storage: "",
+  vCPU: usersServices.resources.vCPU,
+  memory: usersServices.resources.memory,
+  storage: usersServices.resources.storage,
 });
 const network = ref({
-  publicIp: false,
-  vpc: "",
-  subnet: "",
+  publicIp: usersServices.network.publicIp,
+  vpc: usersServices.network.vpc,
+  subnet: usersServices.network.subnet,
 });
 
 const subNetTouched = ref(false);
@@ -387,25 +406,41 @@ const memories = [
 ];
 
 const edit = async () => {
+
+
+loading.value = true
+  const updatedData = {};
+
+    if (serviceName.value) updatedData.serviceName = serviceName.value;
+    if (description.value) updatedData.description = description.value;
+    if (selectedRegion.value) updatedData.region = selectedRegion.value;
+    if (instanceType.value) updatedData.instanceType = instanceType.value;
+    if (resources.value)  updatedData.resources = resources.value;
+    if (network.value) updatedData.network = network.value;
+    if (securityGroups.value && securityGroups.value.length > 0) {
+      updatedData.securityGroups = securityGroups.value;
+    }
   try {
     const response = await axios.put(
       `https://reqres.in/api/users/${usersServices.id}`,
-      {
-        serviceName: serviceName.value,
-        description: description.value,
-        region: selectedRegion.value,
-        instanceType: instanceType.value,
-        resources: resources.value,
-        network: network.value,
-        securityGroups: securityGroups.value,
-      }
+    updatedData
     );
 
     if (response) {
-      console.log("Service configuration updated successfully");
+      loading.value = false;  
+
+      // servicesStore.usersServices = response.data
+      router.push("/cloudService");
+      
     }
-  } catch (err) {
-    console.error(err);
+  } catch (e) {
+    if (e.message.includes("Network")) {
+      toast.error("Please check your internet connection");
+      loading.value = false;
+    } else {
+      loading.value = false;
+      toast.error(e.response.data.message);
+    }
   }
 };
 

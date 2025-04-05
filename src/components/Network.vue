@@ -6,43 +6,7 @@
         Configure the network settings for your cloud service
       </p>
     </div>
-    <!-- <div class="grid grid-cols-1 md:grid-cols-2 sm:grid-cols-2 xl:grid-cols-2 gap-8">
-      <div class="flex flex-col flex-1 gap-4">
-        <label class="font-medium text-[#374151] text-[11.9px] flex gap-4"
-          >Virtual Private Cloud(VPC) <span style="color: red">*</span></label
-        >
-        <div class="flex flex-col gap-2">
-          <div class="flex justify-between">
-            <input v-model="network.vpc"  @blur="vpcTouched = true" class="outline-none   " />
-          <i   class="ri-arrow-drop-down-line -ml-[20px] "></i>
-          </div>
-          
-          <span
-        v-if="vpcError"
-        class="font-normal text-[12px] text-[#EF4444]"
-      >
-        Vpc is required
-      </span>
-        </div>
-      </div>
-      <div class="flex flex-col flex-1 gap-4">
-        <label class="font-medium text-[#374151] text-[11.9px] flex gap-4"
-          >Subnet <span style="color: red">*</span></label
-        >
-        <div class="flex justify-between ">
-          <input v-model="network.subnet" @blur="subNetTouched = true" class="outline-none  " />
-          <i   class="ri-arrow-drop-down-line -ml-[20px] "></i>
-        </div>
-
-         
-          <span
-        v-if="subNetError"
-        class="font-normal text-[12px] text-[#EF4444]"
-      >
-        Subnet is required
-      </span>
-      </div>
-    </div> -->
+  
 
 <div class="grid gap-4 grid-cols-1 xl:grid-cols-2 md:grid-cols-2 ">
   <div class="flex flex-col gap-2 w-full md:w-[70%] sm:w-[70%] xl:w-[70%]">
@@ -50,15 +14,15 @@
         >Virtual Private Cloud (VPC) <span style="color: red">*</span></label
       >
 
-      <!-- dropdown -->
+      <!--vpc dropdown -->
       <div
-        class="border-b-[1px] dropdown cursor-pointer relative border-[#F5F5F5]"
+        class="border-b-[1px] z-50 vpc dropdown cursor-pointer relative border-[#F5F5F5]"
       >
         <div
-          @click.stop="showVpcDropDown = !showVpcDropDown"
+          @click.stop="toggleVpcDropDown "
           class="flex py-2 justify-between"
         >
-          <p>{{ network.vpc }}</p>
+          <p class="font-normal text-[16px]">{{ network.vpc }}</p>
           <i class="ri-arrow-drop-down-line"></i>
         </div>
 
@@ -95,15 +59,15 @@
         >Subnet <span style="color: red">*</span></label
       >
 
-      <!-- dropdown -->
+      <!--subnet dropdown -->
       <div
-        class="border-b-[1px] dropdown cursor-pointer relative border-[#F5F5F5]"
+        class="border-b-[1px] subnet dropdown cursor-pointer relative border-[#F5F5F5]"
       >
         <div
-          @click.stop="showsubnetDropDown = !showsubnetDropDown"
+          @click.stop="togglesubnetDropDown"
           class="flex py-2 justify-between"
         >
-          <p class="font-normal text-[14px]">{{ network.subnet }}</p>
+          <p class="font-normal text-[16px]">{{ network.subnet }}</p>
           <i class="ri-arrow-drop-down-line"></i>
         </div>
 
@@ -198,7 +162,7 @@
 
 <script setup>
 import { useServicesStore } from "@/stores/index";
-import { ref,computed } from "vue";
+import { ref,computed ,onMounted} from "vue";
 import MazCheckbox from "maz-ui/components/MazCheckbox";
 
 const servicesStore = useServicesStore();
@@ -246,6 +210,15 @@ const selectSubnet = (sub) => {
   showsubnetDropDown.value = false;
 };
 
+const toggleVpcDropDown = ()=>{
+  showVpcDropDown.value = !showVpcDropDown.value;
+  showsubnetDropDown.value = false;
+} 
+
+const togglesubnetDropDown = ()=>{
+  showsubnetDropDown.value = !showsubnetDropDown.value;
+  showVpcDropDown.value = false;
+} 
 
 const vpcError = computed(() => {
   return vpcTouched.value && network.value.vpc.trim() === "";
@@ -285,6 +258,20 @@ const saveSecurityGroups = (value) => {
 const navigateBack = () => {
   emit("back");
 };
+
+
+onMounted(() => {
+  document.addEventListener("click", (e) => {
+    if (!e.target.closest("vpc") && showVpcDropDown.value) {
+      showVpcDropDown.value = false;
+    }
+  });
+});
+document.addEventListener("click", (e) => {
+    if (!e.target.closest("subnet") && showsubnetDropDown.value) {
+      showsubnetDropDown.value = false;
+    }
+  });
 </script>
 
 <style lang="scss" scoped></style>

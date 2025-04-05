@@ -17,8 +17,9 @@ export const useServicesStore = defineStore('services', {
       subnet: "",
       publicIp: null,
     },
+    coverImage: null,
     securityGroups: [],
-    usersServices:[] 
+    usersServices:{} 
   }),
 
   actions: {
@@ -42,6 +43,9 @@ export const useServicesStore = defineStore('services', {
     },
     setSecurityGroups(groups) {
       this.securityGroups = groups;
+    },
+    setCoverImage(imageData) {
+      this.coverImage = imageData;
     },
   },
   persist:true,
