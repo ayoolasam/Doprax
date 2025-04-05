@@ -142,7 +142,7 @@
       </button>
 
       <button
-        :disabled="!serviceName || !selectedRegion"
+        :disabled="!serviceName || !selectedRegion || !previewImage"
         @click="saveStepOne"
         class="border-[1px] cursor-pointer text-center h-[38px] rounded-md focus:border-[2px] focus:border-[#DAE5FF] hover:bg-[#0854FD] w-[67px] font-normal disabled:bg-[#0050FF1A] disabled:border-[1px] disabled:border-[#00000000] text-[11.9px] text-white bg-[#2563EB]"
       >
@@ -154,9 +154,12 @@
 
 <script setup>
 import { ref, computed, onMounted } from "vue";
-import { useRouter } from "vue-router";
 import MazCheckbox from "maz-ui/components/MazCheckbox";
 import { useServicesStore } from "@/stores/index";
+
+
+const emit = defineEmits(["next"]);
+const props = defineProps(["step"]);
 
 const showDropDown = ref(false);
 const previewImage = ref(null);
@@ -175,14 +178,10 @@ const regionOptions = [
 const servicesStore = useServicesStore();
 const serviceName = ref("");
 const description = ref("");
-const emit = defineEmits(["next"]);
-const props = defineProps(["step"]);
-const serviceNameTouched = ref(false);
-const descriptionTouched = ref(false);
 
-const descriptionError = computed(() => {
-  return descriptionTouched.value && description.value.trim() === "";
-});
+const serviceNameTouched = ref(false);
+
+
 
 const selectRegion = (region) => {
   selectedRegion.value = region;
