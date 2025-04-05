@@ -25,13 +25,43 @@ body {
   scrollbar-width: none;
 }
 
-input[type='number']::-webkit-inner-spin-button,
-input[type='number']::-webkit-outer-spin-button {
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
 
-
-input[type='number'] {
+input[type="number"] {
   -moz-appearance: textfield;
+
+
+
+
+
+  
+  @media (max-width: 768px) {
+    input[type="number"]::-webkit-outer-spin-button,
+    input[type="number"]::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    input[type="number"] {
+      -moz-appearance: textfield;
+      appearance: none;
+    }
+  }
+
+  @media (max-width: 480px) {
+    input[type="number"] {
+      display: none;
+    }
+    input[type="text"].number-input {
+      display: block;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      ime-mode: disabled;
+    }
+  }
 }
