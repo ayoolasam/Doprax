@@ -45,23 +45,23 @@
           </div>
           <div class="border-b-[1px] flex flex-col border-[#eaecef] p-4">
             <p class="title">Service Name</p>
-            <p class="text-[11.9px] font-normal">{{ usersServices.serviceName }}</p>
+            <p class="text-[11.9px] font-normal text-[#111827]">{{ usersServices.serviceName }}</p>
           </div>
           <div class="border-b-[1px] flex gap-4 flex-col border-[#eaecef] p-4">
             <p class="title">Description</p>
-            <p class="text-[11.9px] font-normal">{{ usersServices.description}}</p>
+            <p class="text-[11.9px]  h-full font-normal break-words text-[#111827] whitespace-normal">{{ usersServices.description}}</p>
           </div>
           <div class="border-b-[1px] flex gap-4 flex-col border-[#eaecef] p-4">
             <p class="title">Region</p>
-            <p class="text-[11.9px] font-normal">{{ usersServices.region }}</p>
+            <p class="text-[11.9px] font-normal text-[#111827]">{{ usersServices.region }}</p>
           </div>
           <div class="border-b-[1px] flex gap-4 flex-col border-[#eaecef] p-4">
             <p class="title">Instance Type</p>
-            <p class="text-[11.9px] font-normal">{{ usersServices.instanceType }}</p>
+            <p class="text-[11.9px] font-normal text-[#111827]">{{ usersServices.instanceType }}</p>
           </div>
           <div class="border-b-[1px] flex flex-col gap-4 border-[#eaecef] p-4">
             <p class="title">Resources</p>
-            <p class="text-[11.9px] font-normal flex gap-4">
+            <p class="text-[11.9px] font-normal text-[#111827] flex gap-4">
               <span>{{ usersServices.resources.vCPU }} vCPU,</span>
           <span> {{ usersServices.resources.memory }} Memory,</span>
           <span>{{ usersServices.resources.storage }} Storage </span>
@@ -69,7 +69,7 @@
           </div>
           <div class="border-b-[1px] flex flex-col gap-4 border-[#eaecef] p-4">
             <p class="title">Network</p>
-            <div class="text-[11.9px] font-normal">
+            <div class="text-[11.9px] text-[#111827] font-normal">
               <p class="text-[11.9px]">VPC:  {{ usersServices.network.vpc }}</p>
               <p class="text-[11.9px]">Subnet:  {{ usersServices.network.subnet }}</p>
               <p class="text-[11.9px]">Public IP:  {{ usersServices.network.publicIp ? "Yes": 'No' }}</p>
@@ -82,7 +82,7 @@
             <div
               class="w-full rounded-md px-4 py-4 border-[1px] border-[#E5E7EB]"
             >
-              <p v-for="(group,index) in usersServices.securityGroups" :key="index" class="text-[11.9px] font-normal">{{ group }}</p>
+              <p v-for="(group,index) in usersServices.securityGroups" :key="index" class="text-[11.9px] text-[#111827] font-normal">{{ group }}</p>
             </div>
           </div>
         </div>

@@ -27,25 +27,25 @@
         class="border-b-[1px] flex gap-4 xl:gap-0 md:gap-0 xl:flex-row flex-col md:flex-row sm:flex-row border-[#eaecef] p-4"
       >
         <p class="title xl:w-[20%] md:w-[20%] sm:w-[20%]">Service Name</p>
-        <p class="text-[11.9px] font-normal">{{ servicesStore.serviceName }}</p>
+        <p class="text-[11.9px] font-normal text-[#111827]">{{ servicesStore.serviceName }}</p>
       </div>
       <div
         class="border-b-[1px] gap-4 xl:gap-0 md:gap-0 flex xl:flex-row flex-col md:flex-row sm:flex-row border-[#eaecef] p-4"
       >
         <p class="title w-[20%] md:w-[20%] sm:w-[20%]">Description</p>
-        <p class="text-[11.9px] font-normal">{{ servicesStore.description }}</p>
+        <p class="text-[11.9px]  h-full text-[#111827] font-normal break-words whitespace-normal">{{ servicesStore.description }}</p>
       </div>
       <div
         class="border-b-[1px] gap-4 xl:gap-0 md:gap-0 flex xl:flex-row flex-col md:flex-row sm:flex-row border-[#eaecef] p-4"
       >
         <p class="title md:w-[20%] sm:w-[20%]">Region</p>
-        <p class="text-[11.9px] font-normal">{{ servicesStore.region }}</p>
+        <p class="text-[11.9px] text-[#111827] font-normal">{{ servicesStore.region }}</p>
       </div>
       <div
         class="border-b-[1px] gap-4 xl:gap-0 md:gap-0 flex xl:flex-row flex-col md:flex-row sm:flex-row border-[#eaecef] p-4"
       >
         <p class="title xl:w-[20%] sm:w-[20%] md:w-[20%]">Instance Type</p>
-        <p class="text-[11.9px] font-normal">
+        <p class="text-[11.9px] text-[#111827] font-normal">
           {{ servicesStore.instanceType }}
         </p>
       </div>
@@ -53,7 +53,7 @@
         class="border-b-[1px] gap-4 xl:gap-0 md:gap-0 flex xl:flex-row flex-col md:flex-row sm:flex-row border-[#eaecef] p-4"
       >
         <p class="title xl:w-[20%] md:w-[20%] sm:w-[20%]">Resources</p>
-        <p class="text-[11.9px] font-normal flex gap-2">
+        <p class="text-[11.9px] font-normal text-[#111827] flex gap-2">
           <span>{{ servicesStore.resources.vCPU }} vCPU,</span>
           <span> {{ servicesStore.resources.memory }} Memory,</span>
           <span>{{ servicesStore.resources.storage }} Storage </span>
@@ -63,9 +63,9 @@
         class="border-b-[1px] gap-4 xl:gap-0 md:gap-0 flex xl:flex-row flex-col md:flex-row sm:flex-row border-[#eaecef] p-4"
       >
         <p class="title xl:w-[20%] md:w-[20%] sm:w-[20%]">Network</p>
-        <div class="text-[11.9px] font-normal">
-          <p class="text-[11.9px]">VPC:  {{ servicesStore.network.vpc }}</p>
-          <p class="text-[11.9px]">
+        <div class="text-[11.9px] text-[#111827] font-normal">
+          <p class="text-[11.9px] text-[#111827]">VPC:  {{ servicesStore.network.vpc }}</p>
+          <p class="text-[11.9px] text-[#111827]">
             Subnet:  {{ servicesStore.network.subnet }}
           </p>
           <p class="text-[11.9px]">
@@ -83,7 +83,7 @@
           <p
             v-for="(group, index) in servicesStore.securityGroups"
             :key="index"
-            class="text-[11.9px] font-normal"
+            class="text-[11.9px] text-[#111827] font-normal"
           >
             {{ group }},
           </p>

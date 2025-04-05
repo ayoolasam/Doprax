@@ -25,17 +25,17 @@
 
       <div
         v-else
-        class="xl:h-[292px] xl:w-[466px] flex-col flex justify-between gap-4 rounded-[12px]  border-[1px] border-[#E1E3E6]"
+        class=" xl:w-[466px] md:w-[466px]  sm:w-[466px] flex-col flex justify-between gap-4 rounded-[12px]  border-[1px] border-[#E1E3E6]"
       >
       <div class="p-4">
         <div class="h-[100px] w-[100px] flex flex-col gap-2 items-center justify-center bg-[#F3F4F6] rounded-lg">
           <img src="../assets/images/hardImage.png" alt="image" class=" object-cover w-full h-full rounded-lg" />
         </div>
-        <div class="flex flex-col mt-4 gap-2">
+        <div class="flex flex-col mt-2 gap-2">
           <h1 class="text-[20px] font-medium">
             {{ usersServices.serviceName }}
           </h1>
-          <p class="font-normal text-[14px] text-[#6B7280]">
+          <p class="font-normal  w-full  break-words whitespace-normal text-[14px] text-[#6B7280] ">
             {{ usersServices.description }}
           </p>
         </div>
@@ -44,7 +44,7 @@
       
 
         <div
-          class="p-4 border-t-[1px]  flex items-center justify-between border-[#E1E3E6]"
+          class="p-4 border-t-[1px]   flex items-center justify-between border-[#E1E3E6]"
         >
           <div class="flex gap-8">
             <router-link to="/editServiceConfigurations">
