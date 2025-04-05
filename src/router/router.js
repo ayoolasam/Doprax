@@ -1,5 +1,4 @@
 import {
-  createMemoryHistory,
   createRouter,
   createWebHistory,
 } from "vue-router";

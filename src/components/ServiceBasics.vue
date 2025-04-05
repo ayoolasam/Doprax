@@ -162,7 +162,7 @@ import { useServicesStore } from "@/stores/index";
 
 const showDropDown = ref(false);
 const previewImage = ref(null);
-const router = useRouter();
+
 const selectedRegion = ref("");
 
 const regionOptions = [

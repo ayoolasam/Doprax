@@ -23,7 +23,6 @@
 <script setup>
 import { useRouter } from "vue-router";
 import Steps from "@/components/Steps.vue";
-import Footer from "@/components/Footer.vue";
 import { ref } from "vue";
 import ServiceBasics from "@/components/ServiceBasics.vue";
 import Resources from "../components/Resources.vue";
@@ -31,10 +30,10 @@ import Network from "@/components/Network.vue";
 import Review from "@/components/Review.vue";
 
 const step = ref(1);
-const router = useRouter();
-const serviceBasicsRef = ref(null);
-const resourcesRef = ref(null)
-const networkRef = ref(null)
+
+
+
+
 
 const nextStep = (num)=>{
   step.value = num

@@ -2,7 +2,7 @@
   <div
     class="fixed top-0 left-0 w-full h-full bg-[#00000066] z-[1000] flex xl:justify-end md:justify-end justify-center p-[20px] xl:p-0 items-center"
   >
-    <div class="overflow-y-auto  h-full w-[429px]">
+    <div class="overflow-y-auto no-scrollbar h-full w-[429px]">
       <div class="bg-[#FFFFFF] w-full px-4 flex flex-col">
         <div
           class="h-[68px]  border-b-[1px] border-[#E1E3E6] p-4 flex relative items-center  justify-between"
@@ -70,9 +70,9 @@
           <div class="border-b-[1px] flex flex-col gap-4 border-[#eaecef] p-4">
             <p class="title">Network</p>
             <div class="text-[11.9px] font-normal">
-              <p class="text-[11.9px]">VPC :{{ usersServices.network.vpc }}</p>
-              <p class="text-[11.9px]">Subnet :{{ usersServices.network.subnet }}</p>
-              <p class="text-[11.9px]">Public IP: {{ usersServices.network.publicIp ? "Yes": 'No' }}</p>
+              <p class="text-[11.9px]">VPC:  {{ usersServices.network.vpc }}</p>
+              <p class="text-[11.9px]">Subnet:  {{ usersServices.network.subnet }}</p>
+              <p class="text-[11.9px]">Public IP:  {{ usersServices.network.publicIp ? "Yes": 'No' }}</p>
             </div>
           </div>
           <div

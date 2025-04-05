@@ -1,7 +1,7 @@
 <template>
    <div
   class=" bg-[#f9fafb] p-8">
-    <div class="bg-white  h-screen w-full py-8  rounded-xl shadow-md p-8 flex  flex-col items-center gap-8">
+    <div class="bg-white  xl:h-screen md:h-screen h-[331px] w-full py-8  rounded-xl shadow-md p-8 flex  flex-col items-center gap-8">
     
       <div class="flex items-center flex-col gap-4 justify-center">
          <img src="../assets/icons/Frame.png" alt="image"/>

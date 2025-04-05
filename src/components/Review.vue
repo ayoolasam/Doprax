@@ -64,12 +64,12 @@
       >
         <p class="title xl:w-[20%] md:w-[20%] sm:w-[20%]">Network</p>
         <div class="text-[11.9px] font-normal">
-          <p class="text-[11.9px]">VPC :{{ servicesStore.network.vpc }}</p>
+          <p class="text-[11.9px]">VPC:  {{ servicesStore.network.vpc }}</p>
           <p class="text-[11.9px]">
-            Subnet : {{ servicesStore.network.subnet }}
+            Subnet:  {{ servicesStore.network.subnet }}
           </p>
           <p class="text-[11.9px]">
-            Public IP: {{ servicesStore.network.publicIp ? "Yes" : "No" }}
+            Public IP:  {{ servicesStore.network.publicIp ? "Yes" : "No" }}
           </p>
         </div>
       </div>

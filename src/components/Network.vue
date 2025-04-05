@@ -29,17 +29,17 @@
         <div
           v-if="showVpcDropDown"
           style="box-shadow: 0px 4px 10px rgba(16, 25, 40, 0.05)"
-          class="absolute border-[1px] rounded-[8px] border-[#F0F2F5] bg-[#FFFFFF] top-6 left-0 h-[242px] px-[12px] py-4 w-full overflow-y-auto md:w-[381px] xl:w-[381px]"
+          class="absolute border-[1px] rounded-[8px] border-[#F0F2F5] bg-[#FFFFFF] top-6 left-0  px-[12px] py-4 w-full overflow-y-auto md:w-[381px] xl:w-[381px]"
         >
-          <p class="font-medium text-[14px]">Select a Vpc</p>
+          <p class="font-medium text-[14px]">Select a Virtual Private Cloud (VPC) </p>
           <ul class="mt-4">
             <li
               v-for="(vpc, index) in vpcs"
               @click="selectVpc(vpc)"
               :key="index"
-              class="flex justify-between items-center py-[12px] px-[8px] border-b-[1px] border-[#F5F5F5]"
+              class="flex justify-between last:border-0 items-center py-[12px] px-[8px] border-b-[1px] border-[#F5F5F5]"
             >
-              <span class="text-[14px] font-medium text-[#344054]">
+              <span class="text-[14px]  text-[#344054]" :class="{'font-medium': network.vpc === vpc }">
                 {{ vpc}}</span
               >
               <MazCheckbox
@@ -74,19 +74,18 @@
         <div
           v-if="showsubnetDropDown"
           style="box-shadow: 0px 4px 10px rgba(16, 25, 40, 0.05)"
-          class="absolute border-[1px] rounded-[8px] border-[#F0F2F5] bg-[#FFFFFF] top-6 left-0 h-[242px] px-[12px] py-4 w-full overflow-y-auto md:w-[381px] xl:w-[381px]"
+          class="absolute border-[1px] rounded-[8px] border-[#F0F2F5] bg-[#FFFFFF] top-6 left-0  px-[12px] py-4 w-full overflow-y-auto md:w-[381px] xl:w-[381px]"
         >
-          <p class="font-medium text-[14px]">Select a Subnet</p>
+          <p class="font-medium text-[14px]"> Subnet</p>
           <ul class="mt-4">
             <li
               v-for="(subnet, index) in subNets"
               @click="selectSubnet(subnet)"
               :key="index"
-              class="flex justify-between items-center py-[12px] px-[8px] border-b-[1px] border-[#F5F5F5]"
+              class="flex justify-between items-center last:border-0 py-[12px] px-[8px] border-b-[1px] border-[#F5F5F5]"
             >
-              <span class="text-[14px] font-medium text-[#344054]">
-                {{ subnet}}</span
-              >
+              <span class="text-[14px]  text-[#344054]" :class="{'font-medium': network.subnet === subnet }">
+                {{ subnet}}</span>
               <MazCheckbox
                 v-model="network.subnet"
                 :value="subnet"
@@ -136,7 +135,7 @@
           :value="check.value"
           class="w-[16px] h-[16px] outline-none cursor-pointer"
         />
-        <p @click="saveSecurityGroups(check.value)" class="text-[#374151] cursor-pointer font-normal text-[11.9px]">
+        <p @click="saveSecurityGroups(check.value)" class="text-[#374151] cursor-pointer font-medium text-[11.9px]">
           {{ check.title }}
         </p>
       </div>
@@ -168,37 +167,29 @@ import MazCheckbox from "maz-ui/components/MazCheckbox";
 const servicesStore = useServicesStore();
 const network = ref({
   publicIp: false,
-  vpc: "Development VPC",
-  subnet: "Development Subnet (AZ-b)",
+  vpc: "",
+  subnet: "",
 });
 
 const vpcs = [
+"Default PVC",
   "Development VPC",
-  "Development VPC",
-  "Development VPC",
-  "Development VPC",
-  "Development VPC",
-  "Development VPC",
+  "Production VPC",
+ 
+ 
 ];
 const subNets = [
-  "Development Subnet (AZ-b)",
-  "Development Subnet (AZ-b)",
-  "Development Subnet (AZ-b)",
-  "Development Subnet (AZ-b)",
-  "Development Subnet (AZ-b)",
-  "Development Subnet (AZ-b)",
+ 
+  "Default Subnet (AZ-a)",
+  "Development Subnet (AZ-b)"
+ 
 ];
 
-const subNetTouched = ref(false);
-const vpcTouched = ref(false);
+
+
 const showVpcDropDown = ref(false);
 const showsubnetDropDown = ref(false)
-const selectedVpc = ref("");
-const selectedSubnet = ref("")
 
-const subNetError = computed(() => {
-  return subNetTouched.value && network.value.subnet.trim() === "";
-});
 
 
 const selectVpc = (vpc) => {
@@ -220,9 +211,7 @@ const togglesubnetDropDown = ()=>{
   showVpcDropDown.value = false;
 } 
 
-const vpcError = computed(() => {
-  return vpcTouched.value && network.value.vpc.trim() === "";
-});
+
 const securityGroups = ref([]);
 const emit = defineEmits(["next", "back"]);
 
